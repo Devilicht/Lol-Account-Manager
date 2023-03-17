@@ -27,7 +27,7 @@ def menu():
     print('Created by Oblivion- github.com/Devilicht')
     print('and Gabriel -github.com/bielviana\n')
     global op
-    op = input('1- Vizualizar suas contas. 2-Adicionar uma nova conta 3-Remover alguma conta. 0 - Sair: ')
+    op = input('1- Vizualizar suas contas. 2-Adicionar uma nova conta 3-Remover alguma conta 4-Atualizar dados no OP.GG . 0 - Sair: ')
     print('')
     if op == '1':
         listAccounts()
@@ -36,15 +36,7 @@ def menu():
     elif op == '3':
         deleteAccount()
     elif op == '4':
-        conn = sql.connect('database.db')
-
-        cursor = conn.cursor()
-        i=0
-        serv=cursor.execute("SELECT server FROM accounts")
-        sum=cursor.execute("SELECT summoner FROM accounts")
-
-        updateStats(serv,sum)    
-        
+        updateStats()       
         
     elif op == '0':
         exit()
@@ -54,28 +46,19 @@ def menu():
         menu()
 
 
-def updateStats(server, summoner,i):
-    
+def updateStats():
+    accounts = checkAccount(type='fetchall')
+    for account in accounts:
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--log-level=3")
         driver = webdriver.Chrome(options=chrome_options)
-        driver.get(f'https://www.op.gg/summoners/{server[i]}/{summoner[i]}')
+        driver.get(f'https://www.op.gg/summoners/br/{account[3]}')
         button = driver.find_element(by=By.CLASS_NAME, value='css-4e9tnt')
         button.click()
-        
-    
-        
-
-    #esultados = cursor.fetchall()
-
-    #resultado = cursor.fetchall()
-    
-
-    
-    #driver.close()
+        driver.close()
 
 
 def getSummoner(server, summoner):
@@ -142,8 +125,8 @@ def listAccounts():
 def addAccount():
     clearScreen()
     global servers
-    login = input('Login: ').lower()
-    password = input('Senha: ').lower()
+    login = input('Login: ')
+    password = input('Senha: ')
     server = input('Server: ').lower()
     while server not in servers:
         print('Server inválido!')
@@ -152,7 +135,7 @@ def addAccount():
         print(f'Login: {login}')
         print(f'Senha: {password}')
         server = input('Server: ').lower()
-    summoner = input('Nick: ').lower()[:16]
+    summoner = input('Nick: ')[:16]
     info = getSummoner(server, summoner)
     if info == None:
         print(f'O invocador {summoner} não existe!')
