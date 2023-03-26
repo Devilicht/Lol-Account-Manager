@@ -7,6 +7,6 @@
 
 -Delete : solicita um nick e vai no banco de dados conferir, caso houver o nick ele busca no banco de dados e deleta todas info do nick.
 
--Atualizar dados : Ele busca todos os nick no banco de dados e faz um request em cada page e interage com o botão "ATUALIZAR DADOS" para que as informações no site sejam atualizadas utilizando selenium.
+-Atualizar dados : Ele busca todos os nick no banco de dados e faz um request em cada page e interage com o botão "ATUALIZAR DADOS" no OP.GG para que as informações no site sejam atualizadas, utilizando selenium.
 
-LIB essenciais : requests, selenium, sqlite.
+LIB essenciais : bs4,requests, selenium, sqlite.
