@@ -3,8 +3,6 @@ from requests import get
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from re import findall
-from database.repository import accountDb
-
 
 
 def updateStats(accounts) -> None:
