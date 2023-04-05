@@ -12,4 +12,4 @@ Esse projeto é um bot para gerenciar contas de league of legends, ele tem as se
 
 # LIB essenciais:
 
-bs4,requests, selenium, sqlite.
+- bs4,requests, selenium, sqlite.
